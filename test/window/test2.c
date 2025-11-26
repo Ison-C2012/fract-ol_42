@@ -1,8 +1,8 @@
-//#include <mlx.h>
+#include <mlx.h>
 #include <X11/X.h>
 #include <stdlib.h>
 
-#include "mlx.h"
+//#include "mlx.h"
 
 typedef struct s_vars
 {
