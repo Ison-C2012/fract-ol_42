@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test2.c                                            :+:      :+:    :+:   */
+/*   test3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: keitotak <keitotak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 13:36:44 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/27 19:13:39 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/11/27 20:16:29 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,21 @@ typedef struct s_vars
 	void	*win;
 } t_vars;
 
-int	window_close(t_vars *vars)
+typedef struct s_coo
 {
-	mlx_destroy_window(vars->mlx, vars->win);
-	exit(0);
-	return (0);
-}
+	int		cx;
+	int		cy;
+	int		x;
+	int		y;
+	int		r;
+	double	t;
+} t_coo;
 
-int	key_hook(int keycode, t_vars *vars)
+typedef struct s_cpxnbr
 {
-	if (keycode == ESC)
-		window_close(vars);
-	printf("%d\n", keycode);
-	return (0);
-}
+	double	x;
+	double	y;
+} t_cpxnbr;
 
 void	put_pixel(t_idata *d, int x, int y, unsigned int color)
 {
@@ -63,52 +64,32 @@ void	put_pixel(t_idata *d, int x, int y, unsigned int color)
 	*(unsigned int *)(d->addr + y * d->size_len + x * bytes) = color;
 }
 
-typedef struct s_coo
+int	render_julia(t_idata *d, double a, double b)
 {
-	int		cx;
-	int		cy;
-	int		x;
-	int		y;
-	int		r;
-	double	t;
-} t_coo;
+	t_cpxnbr	z;
+	t_cpxnbr	z1;
+	t_coo		c;
+	int			count;
 
-void	area_circle(t_idata *d, t_coo *c, unsigned int color)
-{
-	int	r;
-
-	r = 0;
-	while (r < c->r)
-	{
-		c->x = c->cx + (int)lround(r * cos(c->t));
-		c->y = c->cy + (int)lround(r * sin(c->t));
-		put_pixel(d, c->x, c->y, color);
-		r++;
-	}
-}
-
-void	line_circle(t_idata *d, t_coo *c, unsigned int color)
-{
-	c->x = c->cx + (int)lround(c->r * cos(c->t));
-	c->y = c->cy + (int)lround(c->r * sin(c->t));
-	put_pixel(d, c->x, c->y, color);
-}
-
-int	render_circle(t_idata idata, unsigned int color, int fill)
-{
-	t_coo	c;
-
+	z.x = 0;
+	z.y = 0;
 	c.cx = WIDTH / 2;
 	c.cy = HEIGHT / 2;
-	c.r = HEIGHT / 4;
-	c.t = 0;
-	while (c.t < 2 * PI)
+	count = 0;
+	while (1)
 	{
-		if (fill)
-			area_circle(&idata, &c, color);
-		else
-			line_circle(&idata, &c, color);
-		c.t += 1.0 / c.r;
+		put_pixel(d, c.cx + 100 * z.x, c.cy + 100 * z.y, 0x00ff0000);
+		if (count >= 1000000)
+			break ;
+		if (sqrt(pow(z.x, 2.0) + pow(z.y, 2.0)) > 2)
+			break ;
+		z1.x = pow(z.x, 2.0) - pow(z.y, 2.0) + a;
+		z1.y = 2.0 * z.x * z.y + b;
+		if (z1.x == z.x && z1.y == z.y)
+			break ;
+		z.x = z1.x;
+		z.y = z1.y;
+		count++;
 	}
 	return (0);
 }
@@ -132,6 +113,21 @@ int	clear_with_color(t_idata idata, unsigned int color)
 	return (0);
 }
 
+int	window_close(t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx, vars->win);
+	exit(0);
+	return (0);
+}
+
+int	key_hook(int keycode, t_vars *vars)
+{
+	if (keycode == ESC)
+		window_close(vars);
+	printf("%d\n", keycode);
+	return (0);
+}
+
 int	main(void)
 {
 	t_vars	vars;
@@ -142,10 +138,8 @@ int	main(void)
 	idata.img = mlx_new_image(vars.mlx, WIDTH, HEIGHT);
 	idata.addr = mlx_get_data_addr(idata.img, &idata.bpp,
 			&idata.size_len, &idata.endian);
-	printf("bpp=%d, size_len=%d, endian=%d\n", idata.bpp,
-			idata.size_len, idata.endian);
-	clear_with_color(idata, 0x00FFFFFF);
-	render_circle(idata, 0x000000FF, 1);
+	clear_with_color(idata, 0x00000000);
+	render_julia(&idata, -0.3, -0.63);
 	mlx_put_image_to_window(vars.mlx, vars.win, idata.img, 0, 0);
 	mlx_key_hook(vars.win, key_hook, &vars);
 	mlx_hook(vars.win, DestroyNotify, StructureNotifyMask, window_close, &vars);
