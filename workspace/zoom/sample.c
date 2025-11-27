@@ -148,3 +148,9 @@ int main(void)
 	mlx_loop(a.mlx);
 	return 0;
 }
+
+/*
+コンパイル例（環境に合わせてパスは調整）:
+cc zoom_circle.c -lmlx -lXext -lX11 -lm
+*/
+
