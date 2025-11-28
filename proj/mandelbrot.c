@@ -1,27 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractal.c                                          :+:      :+:    :+:   */
+/*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: keitotak <keitotak@student.42tokyo.jp      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 18:20:44 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/28 19:30:59 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/11/28 23:30:01 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-#define ITER_MAX 100
-
-typedef struct s_complex
-{
-	double	a;
-	double	b;
-	double	x;
-	double	y;
-	double	tmp;
-} t_complex;
 
 int	calc_mandelbrot(t_ctx *ctx, int x, int y)
 {

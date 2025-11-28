@@ -6,7 +6,7 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 14:36:39 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/28 19:22:39 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/11/28 23:32:14 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	check_arg(int ac, char *av[])
 
 	if (ac != 2 && ac != 4)
 		err_input();
-	if (ft_isnumber(av[1]) == FALSE)
+	/*if (ft_isnumber(av[1]) == FALSE)
 		err_input();
 	code = ft_atoi(av[1]);
 	if (code < 0 || code > 2)
@@ -62,7 +62,7 @@ void	check_arg(int ac, char *av[])
 			err_input();
 		get_value_for_julia();
 	}
-
+*/
 }
 
 int	main(int argc, char *argv[])

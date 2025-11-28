@@ -6,7 +6,7 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 14:37:23 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/28 19:24:26 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/11/28 23:30:55 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 #define ESC 0xff1b
 #define COLOR 0x00FFFFFF
 #define PI acos(-1)
+#define ITER_MAX 100
 
 typedef struct s_image
 {
@@ -60,6 +61,15 @@ typedef struct s_ctx
 	t_camera	c;
 	t_virtual	v;
 } t_ctx;
+
+typedef struct s_complex
+{
+	double	a;
+	double	b;
+	double	x;
+	double	y;
+	double	tmp;
+} t_complex;
 
 int		mouse_hook(int button,int x,int y,void *param);
 int		key_hook(int keycode, t_ctx *ctx);
