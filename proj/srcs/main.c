@@ -6,7 +6,7 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 14:36:39 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/29 13:33:49 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/11/29 20:57:41 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	init(t_ctx *ctx)
 			&ctx->i.endian);
 	ctx->c.cx = 0.0;
 	ctx->c.cy = 0.0;
-	ctx->c.scale = 0.01;
+	ctx->c.scale = 1.0;
 }
 
 int	main(void)

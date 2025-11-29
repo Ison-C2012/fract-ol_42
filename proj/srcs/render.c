@@ -6,7 +6,7 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 14:41:51 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/29 13:20:10 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/11/29 21:03:55 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ int	render(t_ctx *ctx)
 	ctx->v.vx_max = ctx->c.cx + 0.5 * SIZE * ctx->c.scale;
 	ctx->v.vy_max = ctx->c.cy + 0.5 * SIZE * ctx->c.scale;
 	clear_with_color(ctx, 0x00000000);
-//	draw_mandelbrot(ctx);
-	draw_julia(ctx, -0.3, -0.63);
+	ctx->f.ja = -0.33;
+	ctx->f.jb = -0.30;
+	draw_fractal(ctx, calc_julia);
+//	draw_fractal(ctx, calc_mandelbrot);
 	return (0);
 }

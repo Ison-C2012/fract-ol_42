@@ -6,7 +6,7 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 14:41:51 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/28 14:44:44 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/11/29 20:40:49 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,5 @@ int	render(t_ctx *ctx)
 	draw_grid(ctx);
 	draw_circle(ctx);
 	mlx_put_image_to_window(ctx->mlx, ctx->win, ctx->i.img, 0, 0);
+	return (0);
 }

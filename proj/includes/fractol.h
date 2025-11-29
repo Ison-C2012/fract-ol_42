@@ -6,7 +6,7 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 14:37:23 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/29 13:17:15 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/11/29 20:17:35 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ typedef struct s_virtual
 	double	vy_max;
 } t_virtual;
 
+typedef struct s_fractal
+{
+	double	ja;
+	double	jb;
+} t_fractal;
+
 typedef struct s_ctx
 {
 	void		*mlx;
@@ -60,6 +66,7 @@ typedef struct s_ctx
 	t_image		i;
 	t_camera	c;
 	t_virtual	v;
+	t_fractal	f;
 } t_ctx;
 
 typedef struct s_complex
@@ -75,12 +82,13 @@ int		mouse_hook(int button,int x,int y,void *param);
 int		key_hook(int keycode, t_ctx *ctx);
 int		window_close(t_ctx *ctx);
 void	zoom(t_ctx *ctx, int x, int y, int inout);
-int		render(t_ctx *ctx);
 int		virtual_to_screen_x(t_camera c, double vx);
 int		virtual_to_screen_y(t_camera c, double vy);
-int		draw_mandelbrot(t_ctx *ctx);
-int		draw_julia(t_ctx *ctx, double a, double b);
+int		render(t_ctx *ctx);
 int		clear_with_color(t_ctx *ctx, unsigned int color);
+int		draw_fractal(t_ctx *ctx, int (*f)(t_ctx *, int, int));
+int		calc_mandelbrot(t_ctx *ctx, int x, int y);
+int		calc_julia(t_ctx *ctx, int x, int y);
 void	put_pixel(t_ctx *ctx, int x, int y, unsigned int color);
 
 #endif

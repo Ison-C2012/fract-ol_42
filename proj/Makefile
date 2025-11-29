@@ -1,29 +1,28 @@
 NAME := fractol
 
 CFLAGS := -Wall -Wextra -Werror
-MLXFLAGS := -lmlx -lXext -lX11 -lm
+IFLAGS := -Iincludes -I/home/keitotak/.local/include
+MLXFLAGS := -L/home/keitotak/.local/lib -lmlx -lXext -lX11 -lm
 
 SRCDIR := srcs
 OBJDIR := objs
-INCDIR := includes
 ARCDIR := libft
 
 SRCS	:= 	coord.c \
 			hook.c \
-			julia.c \
 			main.c \
-			mandelbrot.c \
+			im_fractal.c \
 			render.c
 OBJS	:= $(SRCS:%.c=$(OBJDIR)/%.o)
 ARCS	:= libft.a
 
 $(NAME): $(OBJS)
 	@make -C $(ARCDIR)
-	$(CC) $(CFLAGS) $^ $(ARCDIR)/$(ARCS) $(MLXFLAGS) -I $(INCDIR) -o $@
+	$(CC) $(CFLAGS) $^ $(ARCDIR)/$(ARCS) $(IFLAGS) $(MLXFLAGS) -o $@
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< $(MLXFLAGS) -I $(INCDIR) -o $@
+	$(CC) $(CFLAGS) -c $< $(IFLAGS) -o $@
 
 all: $(NAME)
 

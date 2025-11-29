@@ -6,7 +6,7 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 18:00:50 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/28 18:01:47 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/11/29 21:32:02 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	key_hook(int keycode, t_ctx *ctx)
 	return (0);
 }
 
+#define IN 0
+
 void	zoom(t_ctx *ctx, int x, int y, int inout)
 {
 	double	vx;
@@ -35,7 +37,7 @@ void	zoom(t_ctx *ctx, int x, int y, int inout)
 	vx = ctx->c.cx + (x - 0.5 * SIZE) * ctx->c.scale;
 	vy = ctx->c.cy + (y - 0.5 * SIZE) * ctx->c.scale;
 	zoom = 0.9;
-	if (inout)
+	if (inout == IN)
 		ctx->c.scale *= zoom;
 	else
 		ctx->c.scale /= zoom;
@@ -47,7 +49,7 @@ int	mouse_hook(int button,int x,int y,void *param)
 {
 	t_ctx	*ctx;
 
-//	printf("button:%d\tx:%d\ty:%d\n", button, x, y);
+	printf("button:%d\tx:%d\ty:%d\n", button, x, y);
 	ctx = (t_ctx *)param;
 	if (button == 4)
 		zoom(ctx, x, y, 1);
