@@ -6,24 +6,13 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 14:36:39 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/28 23:32:14 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/11/29 13:33:49 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	init(t_ctx *ctx)
-{
-	ctx->mlx = mlx_init();
-	ctx->win = mlx_new_window(ctx->mlx, SIZE, SIZE, "keitotak's screen");
-	ctx->i.img = mlx_new_image(ctx->mlx, SIZE, SIZE);
-	ctx->i.addr = mlx_get_data_addr(ctx->i.img, &ctx->i.bpp, &ctx->i.size_len,
-			&ctx->i.endian);
-	ctx->c.cx = 0.0;
-	ctx->c.cy = 0.0;
-	ctx->c.scale = 0.01;
-}
-
+/*
 void	err_input(void)
 {
 	ft_printf("Invalid Input.\n");
@@ -46,7 +35,7 @@ void	check_arg(int ac, char *av[])
 
 	if (ac != 2 && ac != 4)
 		err_input();
-	/*if (ft_isnumber(av[1]) == FALSE)
+	if (ft_isnumber(av[1]) == FALSE)
 		err_input();
 	code = ft_atoi(av[1]);
 	if (code < 0 || code > 2)
@@ -62,14 +51,26 @@ void	check_arg(int ac, char *av[])
 			err_input();
 		get_value_for_julia();
 	}
+}
 */
+
+void	init(t_ctx *ctx)
+{
+	ctx->mlx = mlx_init();
+	ctx->win = mlx_new_window(ctx->mlx, SIZE, SIZE, "keitotak's screen");
+	ctx->i.img = mlx_new_image(ctx->mlx, SIZE, SIZE);
+	ctx->i.addr = mlx_get_data_addr(ctx->i.img, &ctx->i.bpp, &ctx->i.size_len,
+			&ctx->i.endian);
+	ctx->c.cx = 0.0;
+	ctx->c.cy = 0.0;
+	ctx->c.scale = 0.01;
 }
 
-int	main(int argc, char *argv[])
+int	main(void)
 {
 	t_ctx	ctx;
 
-	check_arg(argc, argv);
+//	check_arg(argc, argv);
 	init(&ctx);
 	render(&ctx);
 	mlx_mouse_hook(ctx.win, mouse_hook, &ctx);

@@ -6,7 +6,7 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 14:37:23 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/28 23:30:55 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/11/29 13:17:15 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <X11/X.h>
 #include <mlx.h>
 
-#include "libft/includes/ft_printf.h"
+#include "../libft/includes/ft_printf.h"
 
 //#define WIDTH 720
 //#define HEIGHT 480

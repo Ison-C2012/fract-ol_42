@@ -6,7 +6,7 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 14:41:51 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/28 18:20:27 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/11/29 13:20:10 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,5 @@ int	render(t_ctx *ctx)
 	clear_with_color(ctx, 0x00000000);
 //	draw_mandelbrot(ctx);
 	draw_julia(ctx, -0.3, -0.63);
+	return (0);
 }
