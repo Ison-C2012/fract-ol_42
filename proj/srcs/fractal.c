@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractal.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keitotak <keitotak@student.42tokyo.jp      +#+  +:+       +#+        */
+/*   By: keitotak <keitotak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 18:20:44 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/30 19:30:34 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/12/01 01:51:33 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,75 +23,79 @@ void	screen_to_gauss(t_ctx *ctx, int x, int y)
 	ctx->z.y = ctx->c.zy + dy * ctx->c.scale;
 }
 
-int	calc_julia(t_ctx *ctx, int x, int y)
+int	calc_julia(t_ctx *ctx)
 {
-	int			k;
-
-	screen_to_gauss(ctx, x, y);
+	screen_to_gauss(ctx, ctx->s.x, ctx->s.y);
 	ctx->z.a = ctx->f.ja;
 	ctx->z.b = ctx->f.jb;
-	k = 0;
-	while (k < ctx->f.iter)
+	ctx->f.iter_cnt = 0;
+	while (ctx->f.iter_cnt < ctx->f.iter_max)
 	{
 		ctx->z.tmp = pow(ctx->z.x, 2.0) - pow(ctx->z.y, 2.0) + ctx->z.a;
 		ctx->z.y = 2 * ctx->z.x * ctx->z.y + ctx->z.b;
-		if (ctx->z.x == ctx->z.tmp)
-			break ;
 		ctx->z.x = ctx->z.tmp;
 		if (pow(ctx->z.x, 2.0) + pow(ctx->z.y, 2.0) > pow(2.0, 2.0))
-			break ;
-		k++;
+			return (false);
+		ctx->f.iter_cnt++;
 	}
-	return (k);
+	return (true);
 }
 
-int	calc_mandelbrot(t_ctx *ctx, int x, int y)
+int	calc_mandelbrot(t_ctx *ctx)
 {
-	int			k;
-
-	screen_to_gauss(ctx, x, y);
+	screen_to_gauss(ctx, ctx->s.x, ctx->s.y);
 	ctx->z.a = ctx->z.x;
 	ctx->z.b = ctx->z.y;
 	ctx->z.x = 0;
 	ctx->z.y = 0;
-	k = 0;
-	while (k < ctx->f.iter)
+	ctx->f.iter_cnt = 0;
+	while (ctx->f.iter_cnt < ctx->f.iter_max)
 	{
 		ctx->z.tmp = pow(ctx->z.x, 2.0) - pow(ctx->z.y, 2.0) + ctx->z.a;
 		ctx->z.y = 2 * ctx->z.x * ctx->z.y + ctx->z.b;
 		ctx->z.x = ctx->z.tmp;
 		if (pow(ctx->z.x, 2.0) + pow(ctx->z.y, 2.0) > pow(2.0, 2.0))
-			break ;
-		k++;
+			return (false);
+		ctx->f.iter_cnt++;
 	}
-	return (k);
+	return (true);
 }
 
-int	draw_fractal(t_ctx *ctx, int (*f)(t_ctx *, int, int))
+void	put_color_into_pixel(t_ctx *ctx, int (*f)(t_ctx *))
 {
-	int				x;
-	int				y;
-	int				count;
 	unsigned int	color;
 
-	y = 0;
-	while (y < SIZE)
+	if (f(ctx))
 	{
-		x = 0;
-		while (x < SIZE)
-		{
-			count = f(ctx, x, y);
-			if (count == ctx->f.iter)
-				color = 0x00000000;
-			else if (count % 2 == 0)
-				color = 0x008B1A1A;
-			else
-				color = 0x00FF0000;
-			put_pixel(ctx, x, y, color);
-			x++;
-		}
-		y++;
+		color = 0x000000FF;
+		ctx->f.flag = 1;
 	}
+	else
+	{
+		color = 0x00000000;
+/*		if (ctx->f.iter_cnt % 2 == 0)
+			color = 0x008B1A1A;
+		else
+			color = 0x00FF0000;
+*/	}
+	put_pixel(ctx, color);
+}
+
+int	draw_fractal(t_ctx *ctx, int (*f)(t_ctx *))
+{
+	ctx->s.y = ctx->s.y_min;
+	while (ctx->s.y < ctx->s.y_max)
+	{
+		ctx->s.x = ctx->s.x_min;
+		while (ctx->s.x < ctx->s.x_max)
+		{
+			put_color_into_pixel(ctx, f);
+			ctx->s.x++;
+		}
+		ctx->s.y++;
+	}
+	if (ctx->f.flag == 0)
+		invalid_args(INVALID_ARGS_FOR_JULIA);
 	mlx_put_image_to_window(ctx->mlx, ctx->win, ctx->i.img, 0, 0);
 	return (0);
 }

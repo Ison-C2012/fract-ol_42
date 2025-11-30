@@ -6,7 +6,7 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 14:36:39 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/30 21:30:06 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/12/01 01:40:08 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 	t_ctx	ctx;
 
 	if (argc < 2 || argc > 4)
-		invalid_args();
+		invalid_args(INVALID_ARGS);
 	check_args(&ctx, &argv[1], argc - 1);
 	init(&ctx);
 	render(&ctx);

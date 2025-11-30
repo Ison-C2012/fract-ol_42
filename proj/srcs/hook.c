@@ -6,7 +6,7 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 18:00:50 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/30 22:00:41 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/12/01 01:34:25 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ int	key_hook(int keycode, t_ctx *ctx)
 #define OUT 1
 #define ZOOM 0.60
 
-void	zoom(t_ctx *ctx, int x, int y, int inout)
+void	zoom(t_ctx *ctx, int sx, int sy, int inout)
 {
 	double	dx;
 	double	dy;
 	double	zx;
 	double	zy;
 
-	dx = (double)x - 0.5 * SIZE;
-	dy = (double)y - 0.5 * SIZE;
+	dx = (double)sx - 0.5 * SIZE;
+	dy = (double)sy - 0.5 * SIZE;
 	zx = ctx->c.zx + dx * ctx->c.scale;
 	zy = ctx->c.zy + dy * ctx->c.scale;
 	if (inout == IN)
@@ -49,21 +49,21 @@ void	zoom(t_ctx *ctx, int x, int y, int inout)
 	ctx->c.zy = zy - dy * ctx->c.scale;
 }
 
-int	mouse_hook(int button, int x, int y, void *param)
+int	mouse_hook(int button, int sx, int sy, void *param)
 {
 	t_ctx	*ctx;
 
-	printf("button:%d\tx:%d\ty:%d\n", button, x, y);
+	printf("button:%d\tx:%d\ty:%d\n", button, sx, sy);
 	ctx = (t_ctx *)param;
 	if (button == 4)
 	{
-		zoom(ctx, x, y, IN);
-		ctx->f.iter += 4;
+		zoom(ctx, sx, sy, IN);
+		ctx->f.iter_max += 4;
 	}
 	if (button == 5)
 	{
-		zoom(ctx, x, y, OUT);
-		ctx->f.iter -= 4;
+		zoom(ctx, sx, sy, OUT);
+		ctx->f.iter_max -= 4;
 	}
 	render(ctx);
 	return (0);

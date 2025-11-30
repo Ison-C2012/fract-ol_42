@@ -6,7 +6,7 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 17:58:11 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/30 21:29:16 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/12/01 02:10:34 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,11 @@ void	init(t_ctx *ctx)
 	ctx->c.zx = 0.0;
 	ctx->c.zy = 0.0;
 	ctx->c.scale = 4.0 / SIZE;
-	ctx->f.iter = 40;
+	ctx->s.x_min = 0;
+	ctx->s.x_max = SIZE;
+	ctx->s.y_min = 0;
+	ctx->s.y_max = SIZE;
+	ctx->f.flag = 0;
+	ctx->f.iter_cnt = 0;
+	ctx->f.iter_max = 40;
 }

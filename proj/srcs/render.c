@@ -6,37 +6,18 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 14:41:51 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/30 21:29:02 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/12/01 00:50:00 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	put_pixel(t_ctx *ctx, int x, int y, unsigned int color)
+void	put_pixel(t_ctx *ctx, unsigned int color)
 {
 	char	*p;
 
-	if (x < 0 || x >= SIZE || y < 0 || y >= SIZE)
-		return ;
-	p = ctx->i.addr + y * ctx->i.size_len + x * ctx->i.bpp / 8;
+	p = ctx->i.addr + ctx->s.y * ctx->i.size_len + ctx->s.x * ctx->i.bpp / 8;
 	*(unsigned int *)p = color;
-}
-
-int	clear_with_color(t_ctx *ctx, unsigned int color)
-{
-	int		x;
-	int		y;
-
-	y = 0;
-	while (y < SIZE)
-	{
-		x = 0;
-		while (x < SIZE)
-			put_pixel(ctx, x++, y, color);
-		y++;
-	}
-	mlx_put_image_to_window(ctx->mlx, ctx->win, ctx->i.img, 0, 0);
-	return (0);
 }
 
 int	render(t_ctx *ctx)

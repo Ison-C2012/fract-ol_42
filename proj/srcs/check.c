@@ -6,7 +6,7 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 19:58:26 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/30 21:55:16 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/12/01 01:27:36 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,5 @@ void	check_args(t_ctx *ctx, char **args, int count)
 	else
 		check = 1;
 	if (check)
-		invalid_args();
+		invalid_args(INVALID_ARGS);
 }

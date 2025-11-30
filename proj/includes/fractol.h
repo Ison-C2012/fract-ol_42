@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keitotak <keitotak@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: keitotak <keitotak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 14:37:23 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/30 21:29:53 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/12/01 01:39:36 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <math.h>
 #include <X11/X.h>
 #include <mlx.h>
@@ -29,9 +30,8 @@
 #define JULIA 1
 #define SIZE 700
 #define ESC 0xff1b
-#define COLOR 0x00FFFFFF
-#define PI acos(-1)
-#define ITER_MAX 100
+#define INVALID_ARGS 0
+#define INVALID_ARGS_FOR_JULIA 1
 
 typedef struct s_image
 {
@@ -51,22 +51,22 @@ typedef struct s_camera
 
 typedef struct s_screen
 {
+	int	x_min;
+	int	x_max;
+	int	y_min;
+	int	y_max;
 	int	x;
 	int	y;
-	int	x_max;
-	int	x_min;
-	int	y_max;
-	int	y_min;
 } t_screen;
 
 typedef struct s_gauss
 {
-	double	x;
-	double	y;
 	double	x_min;
 	double	y_min;
 	double	x_max;
 	double	y_max;
+	double	x;
+	double	y;
 	double	a;
 	double	b;
 	double	tmp;
@@ -75,7 +75,9 @@ typedef struct s_gauss
 typedef struct s_fractal
 {
 	int		type;
-	int		iter;
+	int		flag;
+	int		iter_cnt;
+	int		iter_max;
 	double	ja;
 	double	jb;
 } t_fractal;
@@ -92,17 +94,16 @@ typedef struct s_ctx
 } t_ctx;
 
 void	check_args(t_ctx *ctx, char **args, int count);
-void	invalid_args(void);
+void	invalid_args(int type);
 void	failed_malloc(void);
 void	init(t_ctx *ctx);
 int		render(t_ctx *ctx);
-int		clear_with_color(t_ctx *ctx, unsigned int color);
-int		draw_fractal(t_ctx *ctx, int (*f)(t_ctx *, int, int));
-int		calc_julia(t_ctx *ctx, int x, int y);
-int		calc_mandelbrot(t_ctx *ctx, int x, int y);
-void	put_pixel(t_ctx *ctx, int x, int y, unsigned int color);
-int		mouse_hook(int button,int x,int y,void *param);
-void	zoom(t_ctx *ctx, int x, int y, int inout);
+int		draw_fractal(t_ctx *ctx, int (*f)(t_ctx *));
+int		calc_mandelbrot(t_ctx *ctx);
+int		calc_julia(t_ctx *ctx);
+void	put_pixel(t_ctx *ctx, unsigned int color);
+int		mouse_hook(int button,int sx,int sy,void *param);
+void	zoom(t_ctx *ctx, int sx, int sy, int inout);
 int		key_hook(int keycode, t_ctx *ctx);
 int		window_close(t_ctx *ctx);
 
