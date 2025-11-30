@@ -1,6 +1,7 @@
 NAME := fractol
 
-CFLAGS := -Wall -Wextra -Werror
+CC := gcc
+CFLAGS := -g3 -Wall -Wextra -Werror
 IFLAGS := -Iincludes -I/home/keitotak/.local/include
 MLXFLAGS := -L/home/keitotak/.local/lib -lmlx -lXext -lX11 -lm
 
@@ -8,11 +9,13 @@ SRCDIR := srcs
 OBJDIR := objs
 ARCDIR := libft
 
-SRCS	:= 	coord.c \
-			hook.c \
-			main.c \
-			im_fractal.c \
-			render.c
+SRCS	:= 	main.c \
+			check.c \
+			exit.c \
+			init.c \
+			render.c \
+			fractal.c \
+			hook.c
 OBJS	:= $(SRCS:%.c=$(OBJDIR)/%.o)
 ARCS	:= libft.a
 

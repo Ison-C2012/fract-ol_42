@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   coord.c                                            :+:      :+:    :+:   */
+/*   ft_issign.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: keitotak <keitotak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/28 14:46:18 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/28 14:46:31 by keitotak         ###   ########.fr       */
+/*   Created: 2025/11/09 13:41:56 by keitotak          #+#    #+#             */
+/*   Updated: 2025/11/30 20:55:48 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "libft.h"
 
-int	virtual_to_screen_x(t_camera c, double vx)
+int	ft_issign(int c)
 {
-	return (lround((vx - c.cx) / c.scale) + SIZE / 2);
-}
-
-int	virtual_to_screen_y(t_camera c, double vy)
-{
-	return (lround((vy - c.cy) / c.scale) + SIZE / 2);
+	return (c == '+' || c == '-');
 }

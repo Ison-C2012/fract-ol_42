@@ -6,16 +6,11 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 00:53:36 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/09 13:58:54 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/11/30 21:06:40 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static int	ft_issign(char c)
-{
-	return (c == '+' || c == '-');
-}
 
 static long	check(long nb, int sg, char c)
 {

@@ -6,7 +6,7 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 14:41:51 by keitotak          #+#    #+#             */
-/*   Updated: 2025/11/29 21:03:55 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/11/30 21:29:02 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	put_pixel(t_ctx *ctx, int x, int y, unsigned int color)
 {
 	char	*p;
 
-	if (x < 0 || x >= SIZE || y < 0 || y >=SIZE)
+	if (x < 0 || x >= SIZE || y < 0 || y >= SIZE)
 		return ;
 	p = ctx->i.addr + y * ctx->i.size_len + x * ctx->i.bpp / 8;
 	*(unsigned int *)p = color;
@@ -39,18 +39,16 @@ int	clear_with_color(t_ctx *ctx, unsigned int color)
 	return (0);
 }
 
-/*mlx_put_image_to_window(ctx->mlx, ctx->win, ctx->i.img, 0, 0);*/
-
 int	render(t_ctx *ctx)
 {
-	ctx->v.vx_min = ctx->c.cx - 0.5 * SIZE * ctx->c.scale;
-	ctx->v.vy_min = ctx->c.cy - 0.5 * SIZE * ctx->c.scale;
-	ctx->v.vx_max = ctx->c.cx + 0.5 * SIZE * ctx->c.scale;
-	ctx->v.vy_max = ctx->c.cy + 0.5 * SIZE * ctx->c.scale;
-	clear_with_color(ctx, 0x00000000);
-	ctx->f.ja = -0.33;
-	ctx->f.jb = -0.30;
-	draw_fractal(ctx, calc_julia);
-//	draw_fractal(ctx, calc_mandelbrot);
+	mlx_clear_window(ctx->mlx, ctx->win);
+	ctx->z.x_min = ctx->c.zx - 0.5 * SIZE * ctx->c.scale;
+	ctx->z.x_max = ctx->c.zx + 0.5 * SIZE * ctx->c.scale;
+	ctx->z.y_min = ctx->c.zy - 0.5 * SIZE * ctx->c.scale;
+	ctx->z.y_max = ctx->c.zy + 0.5 * SIZE * ctx->c.scale;
+	if (ctx->f.type == MANDELBROT)
+		draw_fractal(ctx, calc_mandelbrot);
+	if (ctx->f.type == JULIA)
+		draw_fractal(ctx, calc_julia);
 	return (0);
 }
