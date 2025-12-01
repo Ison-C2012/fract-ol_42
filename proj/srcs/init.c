@@ -6,7 +6,7 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 17:58:11 by keitotak          #+#    #+#             */
-/*   Updated: 2025/12/01 10:25:10 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/12/01 13:26:09 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 void	init(t_ctx *ctx)
 {
 	ctx->mlx = mlx_init();
+	if (ctx->mlx == NULL)
+		error_exit();
 	ctx->win = mlx_new_window(ctx->mlx, SIZE, SIZE, "keitotak's screen");
 	ctx->i.img = mlx_new_image(ctx->mlx, SIZE, SIZE);
+	if (ctx->win == NULL || ctx->i.img == NULL)
+		error_exit();
 	ctx->i.addr = mlx_get_data_addr(ctx->i.img, &ctx->i.bpp, &ctx->i.size_len,
 			&ctx->i.endian);
 	ctx->c.zx = 0.0;

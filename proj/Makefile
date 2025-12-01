@@ -13,9 +13,9 @@ SRCS	:= 	main.c \
 			check.c \
 			exit.c \
 			init.c \
+			hook.c \
 			render.c \
-			fractal.c \
-			hook.c
+			fractal.c
 OBJS	:= $(SRCS:%.c=$(OBJDIR)/%.o)
 ARCS	:= libft.a
 

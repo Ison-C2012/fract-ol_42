@@ -6,7 +6,7 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 14:41:51 by keitotak          #+#    #+#             */
-/*   Updated: 2025/12/01 11:04:01 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/12/01 13:31:06 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,6 @@ unsigned int	select_color(t_ctx *ctx)
 	else
 		return (0x00FF0000);
 }
-
-/*
-unsigned int	select_color(t_ctx *ctx)
-{
-	if (ctx->f.iter_cnt < ctx->f.iter_max / 5 * 1)
-		return (0x00990000);
-	if (ctx->f.iter_cnt < ctx->f.iter_max / 5 * 2)
-		return (0x00770000);
-	if (ctx->f.iter_cnt < ctx->f.iter_max / 5 * 3)
-		return (0x00550000);
-	if (ctx->f.iter_cnt < ctx->f.iter_max / 5 * 4)
-		return (0x00330000);
-	if (ctx->f.iter_cnt < ctx->f.iter_max / 5 * 5)
-		return (0x00FF0000);
-	return (0x00000000);
-}
-*/
 
 int	render(t_ctx *ctx)
 {

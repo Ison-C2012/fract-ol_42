@@ -6,7 +6,7 @@
 /*   By: keitotak <keitotak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 18:20:44 by keitotak          #+#    #+#             */
-/*   Updated: 2025/12/01 10:06:08 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/12/01 13:28:25 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ int	draw_fractal(t_ctx *ctx, int (*f)(t_ctx *))
 			ctx->s.x++;
 		}
 		ctx->s.y++;
+		mlx_put_image_to_window(ctx->mlx, ctx->win, ctx->i.img, 0, 0);
 	}
 	if (ctx->f.flag == 0)
 		invalid_args(INVALID_ARGS_FOR_JULIA);
-	mlx_put_image_to_window(ctx->mlx, ctx->win, ctx->i.img, 0, 0);
 	return (0);
 }

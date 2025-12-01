@@ -6,7 +6,7 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 18:00:50 by keitotak          #+#    #+#             */
-/*   Updated: 2025/12/01 01:34:25 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/12/01 13:40:26 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	mouse_hook(int button, int sx, int sy, void *param)
 {
 	t_ctx	*ctx;
 
-	printf("button:%d\tx:%d\ty:%d\n", button, sx, sy);
+	ft_printf("button:%d\tx:%d\ty:%d\n", button, sx, sy);
 	ctx = (t_ctx *)param;
 	if (button == 4)
 	{

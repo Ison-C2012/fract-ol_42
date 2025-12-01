@@ -6,18 +6,17 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 20:23:15 by keitotak          #+#    #+#             */
-/*   Updated: 2025/12/01 02:03:47 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/12/01 13:38:41 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-#define MSG_FAILMLC "failed memory allocation."
-
-void	failed_malloc(void)
+void	error_exit(void)
 {
-	ft_putendl_fd(MSG_FAILMLC, 2);
-	exit(1);
+	ft_putendl_fd("\e[31m+===============  ERROR OCCURED  ===============+", 2);
+	ft_putendl_fd("Exited program.\e[0m", 2);
+	exit(EXIT_FAILURE);
 }
 
 void	print_fractal_options(void)
@@ -63,5 +62,5 @@ void	invalid_args(int type)
 		print_fractal_options();
 	if (type == INVALID_ARGS_FOR_JULIA)
 		print_fractal_for_julia();
-	exit(1);
+	exit(EXIT_SUCCESS);
 }
