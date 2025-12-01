@@ -6,7 +6,7 @@
 /*   By: keitotak <keitotak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 14:37:23 by keitotak          #+#    #+#             */
-/*   Updated: 2025/12/01 01:39:36 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/12/01 10:02:34 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,18 +93,19 @@ typedef struct s_ctx
 	t_fractal	f;
 } t_ctx;
 
-void	check_args(t_ctx *ctx, char **args, int count);
-void	invalid_args(int type);
-void	failed_malloc(void);
-void	init(t_ctx *ctx);
-int		render(t_ctx *ctx);
-int		draw_fractal(t_ctx *ctx, int (*f)(t_ctx *));
-int		calc_mandelbrot(t_ctx *ctx);
-int		calc_julia(t_ctx *ctx);
-void	put_pixel(t_ctx *ctx, unsigned int color);
-int		mouse_hook(int button,int sx,int sy,void *param);
-void	zoom(t_ctx *ctx, int sx, int sy, int inout);
-int		key_hook(int keycode, t_ctx *ctx);
-int		window_close(t_ctx *ctx);
+void			check_args(t_ctx *ctx, char **args, int count);
+void			invalid_args(int type);
+void			failed_malloc(void);
+void			init(t_ctx *ctx);
+int				render(t_ctx *ctx);
+int				draw_fractal(t_ctx *ctx, int (*f)(t_ctx *));
+int				calc_mandelbrot(t_ctx *ctx);
+int				calc_julia(t_ctx *ctx);
+unsigned int	select_color(t_ctx *ctx);
+void			put_pixel(t_ctx *ctx, unsigned int color);
+int				mouse_hook(int button,int sx,int sy,void *param);
+void			zoom(t_ctx *ctx, int sx, int sy, int inout);
+int				key_hook(int keycode, t_ctx *ctx);
+int				window_close(t_ctx *ctx);
 
 #endif

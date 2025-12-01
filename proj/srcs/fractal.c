@@ -6,7 +6,7 @@
 /*   By: keitotak <keitotak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 18:20:44 by keitotak          #+#    #+#             */
-/*   Updated: 2025/12/01 01:51:33 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/12/01 10:06:08 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,26 +61,6 @@ int	calc_mandelbrot(t_ctx *ctx)
 	return (true);
 }
 
-void	put_color_into_pixel(t_ctx *ctx, int (*f)(t_ctx *))
-{
-	unsigned int	color;
-
-	if (f(ctx))
-	{
-		color = 0x000000FF;
-		ctx->f.flag = 1;
-	}
-	else
-	{
-		color = 0x00000000;
-/*		if (ctx->f.iter_cnt % 2 == 0)
-			color = 0x008B1A1A;
-		else
-			color = 0x00FF0000;
-*/	}
-	put_pixel(ctx, color);
-}
-
 int	draw_fractal(t_ctx *ctx, int (*f)(t_ctx *))
 {
 	ctx->s.y = ctx->s.y_min;
@@ -89,7 +69,9 @@ int	draw_fractal(t_ctx *ctx, int (*f)(t_ctx *))
 		ctx->s.x = ctx->s.x_min;
 		while (ctx->s.x < ctx->s.x_max)
 		{
-			put_color_into_pixel(ctx, f);
+			if (f(ctx))
+				ctx->f.flag = 1;
+			put_pixel(ctx, select_color(ctx));
 			ctx->s.x++;
 		}
 		ctx->s.y++;
