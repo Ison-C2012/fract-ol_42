@@ -6,7 +6,7 @@
 /*   By: keitotak <keitotak@student.42tokyo.jp      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 18:00:50 by keitotak          #+#    #+#             */
-/*   Updated: 2025/12/01 13:40:26 by keitotak         ###   ########.fr       */
+/*   Updated: 2025/12/04 19:36:24 by keitotak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 int	window_close(t_ctx *ctx)
 {
+	mlx_destroy_image(ctx->mlx, ctx->i.img);
 	mlx_destroy_window(ctx->mlx, ctx->win);
+	mlx_destroy_display(ctx->mlx);
+	free(ctx->mlx);
 	exit(0);
 	return (0);
 }
